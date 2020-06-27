@@ -1,0 +1,31 @@
+class GfG {
+    HashMap<Integer,Integer> hmap=new HashMap<>();
+    // arr[] : the input array containing 0s and 1s
+    // N : size of the input array
+    
+    // return the maximum length of the subarray
+    // with equal 0s and 1s
+    int maxLen(int[] arr, int N)
+    {
+        int sum=0;
+        int maxlen=0;
+      for(int i=0;i<N;i++){
+          arr[i]= (arr[i]==0) ? -1 : 1;
+      }
+      for(int i=0;i<N;i++){
+      sum=sum+arr[i];
+      if(sum==0){
+          maxlen=i+1;
+      }
+       if(hmap.containsKey(sum)){
+           if(maxlen<i-hmap.get(sum))
+           maxlen=i-hmap.get(sum);
+       }
+       else{
+           hmap.put(sum,i);
+       }
+      }
+       return maxlen;
+    }
+}
+       
