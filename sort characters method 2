@@ -1,0 +1,37 @@
+class Solution {
+    StringBuilder sb=new StringBuilder();
+    Map<Character,Integer> hmap=new HashMap<Character,Integer>();
+    int maxlen=0;
+    int freq=0;
+    public String frequencySort(String s) {
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+           freq= hmap.getOrDefault(ch,0)+1;
+            hmap.put(ch,freq);
+            maxlen=Math.max(freq,maxlen);
+        }
+        
+      int size=maxlen+1;
+        List<Character>[] list=new List[size];
+        for(char ch:hmap.keySet()){
+            int num=hmap.get(ch);
+            if(list[num]==null){
+                list[num]=new ArrayList<>();
+            }
+            list[num].add(ch);
+        }
+        for(int i=size-1;i>=0;i--){
+            if(list[i]!=null){
+                List<Character> list1=list[i];
+                for(char c:list1){
+                    int n=hmap.get(c);
+              while(n>0){
+                  sb.append(c);
+                  n--;
+              }
+                }
+            }
+        }
+            return sb.toString();
+    }
+}
