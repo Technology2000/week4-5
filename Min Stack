@@ -1,0 +1,35 @@
+class MinStack {
+        Stack<Integer> stack;
+        Stack<Integer> track;
+    /** initialize your data structure here. */
+    public MinStack() {
+        stack=new Stack<>();
+        track=new Stack<>();
+    }
+    
+    public void push(int x) {
+        stack.push(x);
+        if(stack.size()==1){
+            track.push(x);
+        }
+        else if(x<track.peek()){
+            track.push(x);
+        }
+        else{
+            track.push(track.peek());
+        }
+    }
+    
+    public void pop() {
+        stack.pop();
+        track.pop();
+    }
+    
+    public int top() {
+      return  stack.peek();
+    }
+    
+    public int getMin() {
+        return track.peek();
+    }
+}
