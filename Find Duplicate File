@@ -1,0 +1,21 @@
+class Solution {
+    public List<List<String>> findDuplicate(String[] paths) {
+         HashMap <String,List<String>> hmap = new HashMap<>();
+        for (String num: paths) {
+            String[] values = num.split(" ");
+            for (int i=1;i<values.length;i++) {
+                String[] name_cont = values[i].split("\\(");
+                name_cont[1] = name_cont[1].replace(")", "");
+                List <String> list = hmap.getOrDefault(name_cont[1], new ArrayList<String>());
+                list.add(values[0] + "/" + name_cont[0]);
+                hmap.put(name_cont[1], list);
+            }
+        }
+        List<List<String>> res = new ArrayList<>();
+        for (String key: hmap.keySet()) {
+            if (hmap.get(key).size()>1)
+                res.add(hmap.get(key));
+        }
+        return res;
+    }
+}
