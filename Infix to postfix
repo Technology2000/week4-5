@@ -1,0 +1,59 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+	public static void main (String[] args) {
+	   Scanner sc=new Scanner(System.in);
+	   int T=sc.nextInt();
+	   while(T-->0){
+	       String res=new String("");
+	        Stack<Character> stack=new Stack();
+	       String s=sc.next();
+	       for(int i=0;i<s.length();i++){
+	           char c=s.charAt(i);
+	           if(Character.isLetterOrDigit(c))
+	           res=res+c;
+	           else if(isCharacter(c)){
+while(!stack.isEmpty() && stack.peek()!='('&&precedence(stack.peek())>=precedence(c)){ 
+	   res=res+stack.peek();
+	   stack.pop();
+	           }
+	           stack.push(c);
+	       }
+	       else if(c=='(')
+	       stack.push(c);
+	       else if(c==')'){
+	 while(!stack.isEmpty() && stack.peek()!='('){
+	     res=res+stack.peek();
+	     stack.pop();
+	 }    
+	 stack.pop();
+	  }
+	   }
+	   while(!stack.isEmpty()){
+	   res+=stack.pop();
+	   }
+	   System.out.println(res);
+	   }
+	   }
+	static boolean isCharacter(char c){
+	    if(c=='+'||c=='-'||c=='*'||c=='/'||c=='^')
+	    return true;
+	    else
+	    return false;
+	}
+	   static int precedence(char ch){
+	       switch(ch){
+	           case '+':
+	           case '-':
+	               return 1;
+	               case '*':
+	                   case '/':
+	                       return 2;
+	                       case '^':
+	                       return 3;
+	       }
+	       return -1;
+	   }
+}
