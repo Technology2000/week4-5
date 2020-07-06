@@ -1,0 +1,27 @@
+class Solution {
+    List<List<Integer>> list = new ArrayList<>();
+         public List<List<Integer>> subsets(int[] nums) {
+        int output[] = new int[nums.length];
+        find(nums,0,nums.length,output,0);
+        return list;
+    }
+    public void find(int nums[],int i,int len,int output[],int pos)
+    {
+        if(i==len)
+        {   
+            List<Integer> l=new ArrayList<>();
+            for(int x=0;x<pos;x++)
+            {
+                l.add(output[x]);
+            }
+            list.add(l);
+            return;
+        }
+        else if(i<len)
+        {
+            find(nums,i+1,len,output,pos);        
+            output[pos]=nums[i];                  
+            find(nums,i+1,len,output,pos+1);       
+        }
+    }
+}
